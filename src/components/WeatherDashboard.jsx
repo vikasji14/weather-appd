@@ -119,18 +119,24 @@ const WeatherDashboard = () => {
               const dailyData = forecast.find((day) => dayjs(day.dt_txt).format("MMM D") === date);
               return (
                 <div
-                  key={index}
-                  className="bg-white/20 backdrop-blur-lg p-4 shadow-md rounded-lg text-white text-center cursor-pointer"
-                  onClick={() => handleDayClick(date)}
-                >
-                  <p className="text-lg font-semibold">{date}</p>
-                  <p className="text-2xl font-bold">{dailyData?.main?.temp}°C</p>
-                  <p className="capitalize">{dailyData?.weather[0]?.description}</p>
-                  <p className="flex items-center justify-center gap-2 mt-2 text-lg">
-                    <WiHumidity size={20} /> {dailyData?.main?.humidity}%
-                  </p>
-                  
-                </div>
+                key={index}
+                className="bg-white/20 backdrop-blur-lg p-4 shadow-md rounded-lg text-white text-center cursor-pointer group relative"
+                onClick={() => handleDayClick(date)}
+              >
+                <p className="text-lg font-semibold">{date}</p>
+                <p className="text-2xl font-bold">{dailyData?.main?.temp}°C</p>
+                <p className="capitalize">{dailyData?.weather[0]?.description}</p>
+                <p className="flex items-center justify-center gap-2 mt-2 text-lg">
+                  <WiHumidity size={20} /> {dailyData?.main?.humidity}%
+                </p>
+              
+                {/* Tooltip on hover */}
+                <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max bg-gray-900 text-white text-xs px-3 py-1 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 z-10">
+                 Click to view hourly forecast
+                </span>
+
+              </div>
+              
               );
             })}
           </div>
